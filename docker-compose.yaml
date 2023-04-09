@@ -16,7 +16,7 @@ services:
       - ${MYSQL_EXPOSE_PORT}
 
     volumes:
-      - my-db:/var/lib/mysql
+      - db:/var/lib/mysql
     networks:
       - my-network
 
@@ -38,10 +38,10 @@ services:
 
 # Names our volume
 volumes:
-  my-db:
-    bar:
+  db:
     driver: local
     driver_opts:
+      type: none
       #default path: /var/lib/docker/volmues
       device: './db-volumes/'
       o: bind
