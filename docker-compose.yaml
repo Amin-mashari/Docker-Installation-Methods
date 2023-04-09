@@ -2,7 +2,7 @@ version: '3.3'
 services:
   db:
     image: mysql:8.0
-    restart: always
+    #restart: always
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER} 
@@ -17,6 +17,11 @@ services:
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
+    networks:
+      - task-network
 # Names our volume
 volumes:
   my-db:
+
+networks:
+  task-network:
