@@ -8,7 +8,7 @@ first remove older versions
  sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
-##step2: setup ubuntu repository
+## step 2: setup ubuntu repository
 
 1.Update the apt package index and install packages to allow apt to use a repository over HTTPS:
 ```
@@ -34,10 +34,10 @@ echo \
 ```
 
 
-##step2.5: set dns for iranian people
+## step 2.5: set dns for iranian people
 
 
-##step3:Install Docker Engine
+## step 3:Install Docker Engine
 
 1.Update the apt package index
 
