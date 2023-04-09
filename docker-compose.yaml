@@ -1,26 +1,19 @@
-# example for env
-# password:${password}
-
-
 version: '3.3'
 services:
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: 'db'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'password'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER} 
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '3306:3306'
+      - '${EXPOSE_PORT}:${CONTAINER_PORT}'
     expose:
       # Opens port 3306 on the container
-      - '3306'
+      - ${EXPOSE_PORT}
       # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
