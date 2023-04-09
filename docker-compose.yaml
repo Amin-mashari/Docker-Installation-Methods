@@ -49,3 +49,4 @@ volumes:
 
 networks:
   my-network:
+    name: task-network
