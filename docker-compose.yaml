@@ -2,6 +2,7 @@ version: '3.3'
 services:
   db:
     image: mysql:8.0
+    container_name: mysql-v1
     #restart: always
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -10,11 +11,10 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '${EXPOSE_PORT}:${CONTAINER_PORT}'
+      - '${MYSQL_EXPOSE_PORT}:${MYSQL_CONTAINER_PORT}'
     expose:
-      # Opens port 3306 on the container
-      - ${EXPOSE_PORT}
-      # Where our data will be persisted
+      - ${MYSQL_EXPOSE_PORT}
+
     volumes:
       - my-db:/var/lib/mysql
     networks:
