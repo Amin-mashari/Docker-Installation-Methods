@@ -1,4 +1,4 @@
-# docker-installation
+# installation docker on ubuntu-server
 
 ## step 1: install docker
 
@@ -64,3 +64,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 sudo docker run hello-world
 ```
+
+
+# TODO
+set shellinbox for server
