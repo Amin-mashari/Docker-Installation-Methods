@@ -1,6 +1,6 @@
 # installation docker on ubuntu-server
 
-## step 1: install docker
+## step 1: uninstall docker
 
 first remove older versions
 
