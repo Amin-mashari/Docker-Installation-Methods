@@ -59,6 +59,18 @@
                  line="{{ item }}"
       with_items:
         - '{"registry-mirrors": ["https://registry.docker.ir"]}'
+    
+    - name:  daemon-reload restart
+      ansible.builtin.service:
+        name:  daemon-reload
+        state: restarted
+        enabled: true
+      
+    - name:  restart docker
+      ansible.builtin.service:
+        name:  docker
+        state: restarted
+        enabled: true
 
     - name: Pull default Docker image
       community.docker.docker_image:
