@@ -2,17 +2,10 @@
 - hosts: all 
   become: true
   vars:
-    container_count: 2
     default_container_name: docker
-    default_container_image: ubuntu
-    default_container_command: sleep 1d
+    default_container_image: hello-world
   
   tasks:
-    - name: Install aptitude
-      apt:
-        name: aptitude
-        state: latest
-        update_cache: true
 
     - name: Install required system packages
       apt:
@@ -26,6 +19,20 @@
           - python3-setuptools
         state: latest
         update_cache: true
+
+    - lineinfile: dest=/etc/apt/apt.conf create=yes
+                 line="{{ item }}"
+      with_items:
+        - Acquire::http::Proxy "http://Proxy.Docker.ir:5555";
+    
+    - name: copying resolv.conf file with shecan dns
+      become: true 
+      copy:
+        src: ./resolv.conf
+        dest: /etc/resolv.conf
+        owner: root
+        group: root        
+        mode: 0644
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -46,16 +53,21 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
+    
+    # set docker mirror
+    - lineinfile: dest=/etc/docker/daemon.json create=yes
+                 line="{{ item }}"
+      with_items:
+        - '{"registry-mirrors": ["https://registry.docker.ir"]}'
 
     - name: Pull default Docker image
       community.docker.docker_image:
         name: "{{ default_container_image }}"
         source: pull
 
-    - name: Create default containers
+    - name: Create hello-world container
       community.docker.docker_container:
         name: "{{ default_container_name }}{{ item }}"
         image: "{{ default_container_image }}"
-        command: "{{ default_container_command }}"
         state: present
-      with_sequence: count={{ container_count }}
+      
