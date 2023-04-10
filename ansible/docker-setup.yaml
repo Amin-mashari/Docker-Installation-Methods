@@ -82,4 +82,12 @@
         name: "{{ default_container_name }}{{ item }}"
         image: "{{ default_container_image }}"
         state: present
+    - name: "Execute multiple commands"
+      shell: |
+        groupadd docker
+        usermod -aG docker $USER
+        newgrp docker
+        chown "$USER":"$USER" /home/"$USER"/.docker -R
+        chmod g+rwx "$HOME/.docker" -R
+
       
