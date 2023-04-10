@@ -2,8 +2,7 @@ version: '3.3'
 services:
   db:
     image: mysql:8.0
-    container_name: mysql-v1
-    #restart: always
+    container_name: mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER} 
@@ -11,30 +10,29 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
     ports:
       # <Port exposed> : <MySQL Port running inside container>
-      - '${MYSQL_EXPOSE_PORT}:${MYSQL_CONTAINER_PORT}'
+      - '2306:3306'
     expose:
-      - ${MYSQL_EXPOSE_PORT}
+      - 2306
 
     volumes:
       - db:/var/lib/mysql
     networks:
-      - my-network
+      - admin-panel-network
 
   #--------------------------#
   phpmyadmin:
     depends_on:
       - db
     image: phpmyadmin/phpmyadmin:5
-    container_name: phpmyadmin-v1
-    #restart: always
+    container_name: phpmyadmin
     ports:
-      - '${PHP_EXPOSE_PORT}:${PHP_CONTAINER_PORT}'
+      - '8080:80'
     environment:
       PMA_HOST: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
     
     networks:
-      - my-network
+      - admin-panel-network
 
 # Names our volume
 volumes:
@@ -48,5 +46,5 @@ volumes:
   
 
 networks:
-  my-network:
-    name: task-network
+  admin-panel-network:
+    name: admin-panel-network
