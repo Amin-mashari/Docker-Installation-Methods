@@ -20,19 +20,16 @@
         state: latest
         update_cache: true
 
-    - lineinfile: dest=/etc/apt/apt.conf create=yes
-                 line="{{ item }}"
-      with_items:
-        - Acquire::http::Proxy "http://Proxy.Docker.ir:5555";
-    
-    - name: copying resolv.conf file with shecan dns
-      become: true 
-      copy:
-        src: ./resolv.conf
-        dest: /etc/resolv.conf
-        owner: root
-        group: root        
-        mode: 0644
+    - name: "add proxy to install docker"
+      shell: |
+        echo >> /etc/apt/apt.conf "Acquire::http::Proxy "http://Proxy.Docker.ir:5555";"
+
+
+    - name: "and shecan dns to resolv.conf"
+      shell: |
+        echo >> /etc/resolv.conf "nameserver 178.22.122.100"
+        echo >> /etc/resolv.conf "nameserver 185.51.200.2"
+
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -82,7 +79,8 @@
         name: "{{ default_container_name }}{{ item }}"
         image: "{{ default_container_image }}"
         state: present
-    - name: "Execute multiple commands"
+    
+    - name: "add user ro docker group"
       shell: |
         groupadd docker
         usermod -aG docker $USER
