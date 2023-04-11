@@ -29,3 +29,9 @@ if you didnt set custom inventory, ansible will read `/etc/ansible/hosts` file a
 ```
 ansible-playbook -i inventory docker-setup.yaml
 ```
+
+#### for see logs 
+
+```
+ansible-playbook -i inventory -v docker-setup.yaml
+```
