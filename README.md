@@ -36,6 +36,10 @@ echo \
 
 ## step 2.5: set dns for iranian people
 
+```
+sudo echo >> /etc/resolv.conf "nameserver 178.22.122.100"
+sudo echo >> /etc/resolv.conf "nameserver 185.51.200.2"
+```
 
 ## step 3:Install Docker Engine
 
