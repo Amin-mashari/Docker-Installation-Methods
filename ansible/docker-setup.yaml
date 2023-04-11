@@ -26,10 +26,10 @@
         sudo echo >> /etc/resolv.conf "nameserver 178.22.122.100"
         sudo echo >> /etc/resolv.conf "nameserver 185.51.200.2"
 
-    # - name: "Add Docker official GPG key:"
-    #   shell: |
-    #     sudo mkdir -m 0755 -p /etc/apt/keyrings
-    #     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    - name: "Add Docker official GPG key:"
+      shell: |
+        sudo mkdir -m 0755 -p /etc/apt/keyrings
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
               
     - name: "Set up a repository"
       shell: |
@@ -81,7 +81,7 @@
 
     - name: "Add remote user to docker group"
       user:
-        name: "test"
+        name: "test" # set your remote user
         group: "docker"
         append: yes
 
