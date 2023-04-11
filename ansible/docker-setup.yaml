@@ -4,6 +4,11 @@
   vars:
     default_container_name: docker
     default_container_image: hello-world
+    mirror_registry:
+            {
+            "registry-mirrors": ["https://registry.docker.ir"]
+            }
+
   
   tasks:
 
@@ -21,35 +26,44 @@
         sudo echo >> /etc/resolv.conf "nameserver 178.22.122.100"
         sudo echo >> /etc/resolv.conf "nameserver 185.51.200.2"
 
-    - name: "Add Docker official GPG key:"
-      shell: |
-        sudo mkdir -m 0755 -p /etc/apt/keyrings
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    # - name: "Add Docker official GPG key:"
+    #   shell: |
+    #     sudo mkdir -m 0755 -p /etc/apt/keyrings
+    #     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
               
     - name: "Set up a repository"
       shell: |
+        echo \
         "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
         "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         
+    - name: "Update apt "
+      shell: sudo apt-get update
 
-    - name: "Update apt and install docker engine"
-      shell: |
-        sudo chmod a+r /etc/apt/keyrings/docker.gpg
-        sudo apt-get update
-        sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+    - name: "Install docker-ce"
+      shell: sudo apt-get install docker-ce -y
     
+
+    - name: "Install docker-ce-cli "
+      shell: sudo apt-get install docker-ce-cli -y
+    
+
+    - name: "Install containerd.io"
+      shell: sudo apt-get install containerd.io -y
+    
+
+    - name: "Install docker-buildx-plugin"
+      shell: sudo apt-get install docker-buildx-plugin -y
+    
+
+    - name: "Install docker-compose-plugin"
+      shell: sudo apt-get install docker-compose-plugin -y
+
     # set docker mirror
-    - lineinfile: dest=/etc/docker/daemon.json create=yes
-                 line="{{ item }}"
-      with_items:
-        - '{"registry-mirrors": ["https://registry.docker.ir"]}'
-    
-    - name:  daemon-reload restart
-      ansible.builtin.service:
-        name:  daemon-reload
-        state: restarted
-        enabled: true
+    - copy:
+        dest: /etc/docker/daemon.json
+        content: "{{ mirror_registry }}" 
       
     - name:  restart docker
       ansible.builtin.service:
@@ -57,13 +71,19 @@
         state: restarted
         enabled: true
     
-    - name: "Add user to docker group"
-      shell: |
-        groupadd docker
-        usermod -aG docker $USER
-        newgrp docker
-        chown "$USER":"$USER" /home/"$USER"/.docker -R
-        chmod g+rwx "$HOME/.docker" -R
+    # optional you may to add your user to docker group 
+
+    - name: "Create docker group"
+      group:
+        name: "docker"
+        state: present
+
+
+    - name: "Add remote user to docker group"
+      user:
+        name: "test"
+        group: "docker"
+        append: yes
 
     - name: Pull default Docker image
       community.docker.docker_image:
@@ -72,7 +92,7 @@
 
     - name: Create hello-world container
       community.docker.docker_container:
-        name: "{{ default_container_name }}{{ item }}"
+        name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
         state: present
     
