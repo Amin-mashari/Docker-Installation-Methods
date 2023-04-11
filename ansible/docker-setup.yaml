@@ -13,22 +13,18 @@
           - ca-certificates
           - curl
           - gnupg
-          - software-properties-common
-          - python3-pip
-          - virtualenv
-          - python3-setuptools
         state: latest
         update_cache: true
 
-    - name: "add proxy to install docker"
-      shell: |
-        echo >> /etc/apt/apt.conf "Acquire::http::Proxy "http://Proxy.Docker.ir:5555";"
+    # - name: "add proxy to install docker"
+    #   shell: |
+    #     echo >> /etc/apt/apt.conf "Acquire::http::Proxy "http://Proxy.Docker.ir:5555";"
 
 
     - name: "and shecan dns to resolv.conf"
       shell: |
-        echo >> /etc/resolv.conf "nameserver 178.22.122.100"
-        echo >> /etc/resolv.conf "nameserver 185.51.200.2"
+        sudo echo >> /etc/resolv.conf "nameserver 178.22.122.100"
+        sudo echo >> /etc/resolv.conf "nameserver 185.51.200.2"
 
 
     - name: Add Docker GPG apt Key
@@ -41,15 +37,10 @@
         repo: deb https://download.docker.com/linux/ubuntu focal stable
         state: present
 
-    - name: Update apt and install docker-ce
-      apt:
-        name: docker-ce
-        state: latest
-        update_cache: true
-
-    - name: Install Docker Module for Python
-      pip:
-        name: docker
+    - name: "Update apt and install docker"
+      shell: |
+        sudo apt-get update
+        sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
     
     # set docker mirror
     - lineinfile: dest=/etc/docker/daemon.json create=yes
@@ -57,11 +48,11 @@
       with_items:
         - '{"registry-mirrors": ["https://registry.docker.ir"]}'
     
-    - name:  daemon-reload restart
-      ansible.builtin.service:
-        name:  daemon-reload
-        state: restarted
-        enabled: true
+    # - name:  daemon-reload restart
+    #   ansible.builtin.service:
+    #     name:  daemon-reload
+    #     state: restarted
+    #     enabled: true
       
     - name:  restart docker
       ansible.builtin.service:
