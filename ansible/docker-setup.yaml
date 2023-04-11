@@ -16,7 +16,7 @@
         state: latest
         update_cache: true
 
-    - name: "and shecan dns to resolv.conf"
+    - name: "Add shecan dns to resolv.conf"
       shell: |
         sudo echo >> /etc/resolv.conf "nameserver 178.22.122.100"
         sudo echo >> /etc/resolv.conf "nameserver 185.51.200.2"
@@ -26,7 +26,7 @@
         sudo mkdir -m 0755 -p /etc/apt/keyrings
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
               
-    - name: "set up a repository"
+    - name: "Set up a repository"
       shell: |
         "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
         "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
@@ -57,7 +57,7 @@
         state: restarted
         enabled: true
     
-    - name: "add user ro docker group"
+    - name: "Add user to docker group"
       shell: |
         groupadd docker
         usermod -aG docker $USER
