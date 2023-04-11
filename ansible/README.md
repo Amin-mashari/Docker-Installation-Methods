@@ -1,16 +1,30 @@
-To execute the playbook only on server1, connecting as sammy, you can use the following command:
+# install ansible
+
+### install by pip
 ```
-ansible-playbook playbook.yml -l server1 -u sammy
+python3 -m pip install --user ansible
 ```
-The -l flag specifies your server and the -u flag specifies which user to log into on the remote server.
 
 
-set inventory
+<a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installing guide</a>
+
+## set custom inventory
+```
+touch ./inventory
+```
+in inventory you will put host ip or domain to ansible remotely connect to your server 
+
+## list content of custom inventory
 ```
 ansible-inventory -i inventory --list
 ```
 
-run the playbook with custom inventory
+### NOTE:
+
+if you didnt set custom inventory, ansible will read `/etc/ansible/hosts` file as a his default inventory.
+
+
+## run the playbook with custom inventory
 
 ```
 ansible-playbook -i inventory docker-setup.yaml
