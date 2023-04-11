@@ -1,6 +1,5 @@
-192.168.81.129
+192.168.81.130
 [all:vars]
 ansible_user=test
 ansible_ssh_pass=password
 ansible_sudo_pass=password
-
