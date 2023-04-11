@@ -19,5 +19,4 @@ automate :
 
 install shellinbox
 
-<a href="https://docs.docker.com/engine/security/protect-access/">set tcp for docker instead of unix</a>
 
