@@ -34,15 +34,10 @@ services:
     networks:
       - admin-panel-network
 
-# Names our volume
 volumes:
   db:
-    driver: local
-    driver_opts:
-      type: none
-      #default path: /var/lib/docker/volmues
-      device: './db-volumes/'
-      o: bind
+    name: mysql-volume
+    # path : /var/lib/docker/volumes
   
 
 networks:
