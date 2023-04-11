@@ -57,10 +57,22 @@ sudo chmod a+r /etc/apt/keyrings/docker.gpg
 sudo apt-get update
 ```
 
-
 2.Install Docker Engine, containerd, and Docker Compose.
 ```
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+## step 4:set up a docker registery
+
+1. add mirror registery to docker deamon
+```
+sudo echo >> /etc/docker/daemon.json '{"registry-mirrors": ["https://registry.docker.ir"]}'
+```
+
+2. restart engine
+```
+systemctl daemon-reload
+systemctl restart docker
 ```
 
 # verify the installation
@@ -69,6 +81,11 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo docker run hello-world
 ```
 
-
-# TODO
-set shellinbox for server
+### to run docker without sudo
+```
+groupadd docker
+usermod -aG docker $USER
+newgrp docker
+chown "$USER":"$USER" /home/"$USER"/.docker -R
+chmod g+rwx "$HOME/.docker" -R
+```
