@@ -51,5 +51,9 @@ getInput () {
     fi
 }
 
+help () {
+    #TODO
+}
+
 # Start script from here
 getInput
