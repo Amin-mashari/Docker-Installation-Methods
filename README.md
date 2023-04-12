@@ -14,6 +14,17 @@ I hope this project is useful for you
 - <a href="https://github.com/Amin-mashari/docker-installation/tree/main/docker-compose">docker-compose.yaml sample</a>
 
 
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
 
 TODO:
 
