@@ -2,6 +2,25 @@
 
 # First, switch to the root user
 
+# main function, start script from here
+main () {
+    if [ $# -eq 1 ] && [ $1 == '-h' ];
+    then
+        help
+    elif [ $# -eq 0 ]
+        getInput
+    else
+        err
+    fi
+}
+
+# Error function for input parameter error
+err () {
+    echo -e "\ninput parameter error!\nused bellow input parameter\n"
+    help
+    exit 1
+}
+
 # This function for install and enable resolvconf service
 installResolvconf () {
     PACKAGE="resolvconf"
@@ -51,9 +70,11 @@ getInput () {
     fi
 }
 
+# Help function
 help () {
-    #TODO
+    echo -e "\t------------------HELP---------------------"
+    
 }
 
 # Start script from here
-getInput
+main $@
