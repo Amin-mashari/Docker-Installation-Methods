@@ -7,7 +7,8 @@ main () {
     if [ $# -eq 1 ] && [ $1 == '-h' ];
     then
         help
-    elif [ $# -eq 0 ]
+    elif [ $# -eq 0 ];
+    then
         getInput
     else
         err
@@ -72,8 +73,14 @@ getInput () {
 
 # Help function
 help () {
-    echo -e "\t------------------HELP---------------------"
-    
+    echo -e "\n\t------------------HELP---------------------"
+    echo -e "\tAfter you run this script you must choose 1 or 2\n
+    \t1: for install and run resolvconf service.
+    \t2: for set dns ips\n
+    \tIn section 2, You must enter your desired dns IPs in the following format:
+    \t178.22.122.100,185.51.200.2
+    \tYou must to separate the IPs with a (,) symbol"
+
 }
 
 # Start script from here
