@@ -13,7 +13,7 @@ python3 -m pip install --user ansible
 
 <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installing guide</a>
 
-after isntalaation we should set inventory for ansible, host inventory is a file that we tell ansible to where to go.
+after installation, we should set inventory for ansible. host inventory is a file that we tell ansible to where to go.
 
 ## set custom inventory
 ```
@@ -28,7 +28,7 @@ ansible-inventory -i inventory --list
 
 ### NOTE:
 
-if you didnt set custom inventory, ansible will read `/etc/ansible/hosts` file as a his default inventory.
+if you didn't set custom inventory, ansible will read `/etc/ansible/hosts` file as a his default inventory.
 
 
 ## run the playbook with custom inventory
