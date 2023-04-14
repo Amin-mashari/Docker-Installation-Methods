@@ -32,6 +32,24 @@ $ chmod +x ./install-docker.sh
 $ ./install-docker.sh
 ```
 
+# Installation docker-compose by bash script
+
+Using this script, you can automatically install the latest version of docker-compose
+
+You can also install any other desired version of docker-compose
+
+## Usage
+
+### usage install-docker-compose.sh
+
+```bash
+# Make file executable
+$ chmod +x ./install-docker-compose.sh
+
+# Run script
+$ ./install-docker-compose.sh
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
