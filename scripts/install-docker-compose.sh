@@ -7,7 +7,9 @@ main () {
     if [[ $str == "$substr"* ]];
     then
         echo -e "You have docker-compose installed on your system\n$str\n"
-        confirm    
+        confirm
+    else
+        installLastRelease
     fi
 }
 
@@ -24,16 +26,18 @@ confirm () {
     esac
 }
 
-#curl -s https://api.github.com/repos/docker/compose/releases | grep "docker-compose-linux-x86_64" | cut -d : -f 2,3 | tr -d \"
+installLastRelease () {
+    url=$(curl -s https://api.github.com/repos/docker/compose/releases | grep "docker-compose-linux-x86_64" | cut -d : -f 2,3 | tr -d \" | grep -v "," | grep -v ".sha256" | head -n 1)
+    mkdir ./tmp-docker-compose
+    curl -SL $url -o ./tmp-docker-compose/docker-compose
 
-#mkdir ./tmp-docker-compose
-#curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o ./tmp-docker-compose/docker-compose
+    sudo chmod +x ./tmp-docker-compose/docker-compose
+    sudo mv ./tmp-docker-compose/docker-compose /usr/local/bin
+    rm -rf ./tmp-docker-compose/
 
-#sudo chmod +x ./tmp-docker-compose/docker-compose
-#sudo mv ./tmp-docker-compose/docker-compose /usr/local/bin
-#rm -rf ./tmp-docker-compose/
+    docker compose version
+}
 
-#docker compose version
-
+# curl -s https://api.github.com/repos/docker/compose/releases | grep "docker-compose-linux-x86_64" | cut -d : -f 2,3 | tr -d \" | grep -v "," | grep -v ".sha256" | head -n 1
 
 main
