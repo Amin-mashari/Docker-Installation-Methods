@@ -13,6 +13,8 @@ python3 -m pip install --user ansible
 
 <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installing guide</a>
 
+after isntalaation we should set inventory for ansible, host inventory is a file that we tell ansible to where to go.
+
 ## set custom inventory
 ```
 touch ./inventory
