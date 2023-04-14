@@ -1,10 +1,12 @@
+# what is Docker?
+Docker is a containerization platform that packages applications as lightweight, portable containers that can run on any machine. 
+Containers encapsulate all the dependencies and configurations needed to run an application, making it easier to deploy and manage. 
 
-## Introduction
 
-deploy docker in my country is a little dificult, I simplify this road by add some proxy for my countrymen :).
+## how we can install it?
+In this project, various methods of installing Docker have been explained, including the use of <a href="https://shecan.ir/">shecan</a> DNS for our dear fellow countrymen to avoid any installation issues.
 
 I hope this project is useful for you
-
 
 ### Table of Contents
 
