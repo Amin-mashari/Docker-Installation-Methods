@@ -1,10 +1,15 @@
-# install ansible
+# what is Ansible?
+
+Ansible is an open-source automation tool used for configuration management, application deployment, and task automation. It uses a simple, human-readable language called YAML to define playbooks that automate tasks on multiple systems. Ansible's agentless architecture allows it to be used on a wide range of operating systems and environments.
+
+
+# how we can install ansible?
+
 
 ### install by pip
 ```
 python3 -m pip install --user ansible
 ```
-
 
 <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installing guide</a>
 
