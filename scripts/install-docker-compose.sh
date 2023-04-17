@@ -4,7 +4,7 @@
 URL="url"
 
 
-str=$(docker compose version)
+str=$(which docker-compose)
 substr="Docker Compose version"
 
 # Start script from this function
@@ -14,7 +14,7 @@ main() {
 
 # Checks whether docker-compose is installed or not?
 check() {
-    if [[ $str == "$substr"* ]];
+    if [[ $str == *"$substr" ]];
     then
         echo -e "You have docker-compose installed on your system\n$str\n"
         confirm
