@@ -24,8 +24,8 @@ err () {
 
 # This function for install and enable resolvconf service
 installResolvconf () {
-    PACKAGE="resolvconf"
-    DEB_PACKAGE_NAME="resolvconf.service"
+    serviceName="resolvconf.service"
+    DEB_PACKAGE_NAME="resolvconf"
 
     # update system
     apt-get update 2>> /dev/null
@@ -34,8 +34,8 @@ installResolvconf () {
     apt-get install $DEB_PACKAGE_NAME 2>> /dev/null
 
     # enable and start and check is active resolvconf.service
-    systemctl enable resolvconf.service
-    systemctl start resolvconf.service
+    systemctl enable $serviceName
+    systemctl start $serviceName
     echo -e "\nresolved service is $(systemctl is-active resolvconf.service)\n"
 }
 
