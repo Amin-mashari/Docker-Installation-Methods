@@ -10,11 +10,11 @@ I hope this project is useful for you
 
 ### Table of Contents
 
-- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/ansible">Installation docker by ansible</a>
-- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/manual-installation">Docker installation manually</a>
-- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/scripts">Installation docker by bash script</a>
-- <a href="https://github.com/MohammadrezaJavid/docker-installation/blob/main/scripts/install-docker-compose.sh">Installation docker-compose by bash script</a>
-- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/docker-compose">docker-compose.yaml sample</a>
+- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/ansible">Installing Docker using Ansible</a>
+- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/manual-installation">Manual Docker installation</a>
+- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/scripts">Installing Docker using a Bash script</a>
+- <a href="https://github.com/MohammadrezaJavid/docker-installation/blob/main/scripts/install-docker-compose.sh">Installing docker-compose using a Bash script</a>
+- <a href="https://github.com/Amin-mashari/docker-installation/tree/main/docker-compose">Sample docker-compose.yaml</a>
 
 
 ## Contributing
