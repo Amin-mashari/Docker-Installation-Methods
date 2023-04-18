@@ -4,9 +4,9 @@ Containers encapsulate all the dependencies and configurations needed to run an 
 
 
 ## how we can install it?
-In this project, various methods of installing Docker have been explained, including the use of <a href="https://shecan.ir/">shecan</a> DNS for our dear fellow countrymen to avoid any installation issues.
+In this project, various methods of installing Docker have been explained, including the use of Shecan DNS to avoid any installation issues for our fellow countrymen.
 
-I hope this project is useful for you
+I hope this project is useful for you.
 
 ### Table of Contents
 
