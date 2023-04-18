@@ -1,45 +1,37 @@
-version: '3.3'
+---
+version: "3.3"
 services:
   db:
     image: mysql:8.0
     container_name: mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER} 
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      # <Port exposed> : <MySQL Port running inside container>
-      - '2306:3306'
+      - 2306:3306
     expose:
       - 2306
-
     volumes:
       - db:/var/lib/mysql
     networks:
       - admin-panel-network
-
-  #--------------------------#
   phpmyadmin:
     depends_on:
       - db
     image: phpmyadmin/phpmyadmin:5
     container_name: phpmyadmin
     ports:
-      - '8080:80'
+      - 8080:80
     environment:
       PMA_HOST: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} 
-    
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     networks:
       - admin-panel-network
-
 volumes:
   db:
     name: mysql-volume
-    # path : /var/lib/docker/volumes
-  
-
 networks:
   admin-panel-network:
     name: admin-panel-network
