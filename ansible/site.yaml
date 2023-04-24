@@ -7,15 +7,6 @@
     mirror_registry:
       registry-mirrors:
         - https://registry.docker.ir
-  tasks:
-    - name: Install required system packages
-      apt:
-        pkg:
-          - ca-certificates
-          - curl
-          - gnupg
-        state: latest
-        update_cache: true
     - name: Add shecan dns to resolv.conf
       shell: |
         sudo echo >> /etc/resolv.conf "nameserver 178.22.122.100"
@@ -73,3 +64,11 @@
         name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
         state: present
+- hosts: all
+  become: true
+  roles:
+    - base
+- hosts: cloud
+  become: true
+  roles:
+    - cloud

@@ -1,0 +1,9 @@
+- name: Install required system packages
+  apt:
+    pkg:
+     - ca-certificates
+     - curl
+     - gnupg
+    state: latest
+    update_cache: true
+    when: ansible_distribution in ["Debian","Ubuntu"]
