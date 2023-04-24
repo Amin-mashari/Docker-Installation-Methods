@@ -1,4 +1,6 @@
+[cloud]
 192.168.81.131
+
 [all:vars]
 ansible_user=test
 ansible_ssh_pass=password
