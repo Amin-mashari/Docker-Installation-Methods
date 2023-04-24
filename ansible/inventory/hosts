@@ -1,6 +1,11 @@
 [cloud]
 192.168.81.131
 
+[cloud:vars]
+default_container_name=docker
+default_container_image=hello-world
+
+
 [all:vars]
 ansible_user=test
 ansible_ssh_pass=password

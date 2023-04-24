@@ -1,0 +1,4 @@
+mirror_registry:
+  registry-mirrors:
+    - https://registry.docker.ir
+
